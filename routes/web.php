@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\FarmerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +24,14 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
+
+Route::group(['middleware'=>'checkRole:admin'], function() {
+    Route::get('/dashboard/admin', [AdminController::class, 'index'])->name('admin.index');
+});
+
+Route::group(['middleware'=>'checkRole:farmer'], function() {
+    Route::get('/dashboard/farmer', [FarmerController::class, 'index'])->name('farmer.index');
+});
 
 Route::group(['middleware'=>'auth'], function() {
     Route::get('/product', [ProductController::class, 'index'])->name('product.index');
