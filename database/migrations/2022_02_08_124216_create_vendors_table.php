@@ -13,14 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('products', function (Blueprint $table) {
+        Schema::create('vendors', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('vendor_id');
-            $table->foreign('vendor_id')->references('id')->on('vendors')->onDelete('cascade')->onUpdate('cascade');
-            $table->string('name');
-            $table->integer('price');
-            $table->integer('weight');
-            $table->enum('category',['Hewan Ternak','Produk Ternak','Pakan Ternak','Lainnya']);
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->string('store_name');
+            $table->string('address');
+            $table->string('phone');
             $table->string('image')->default('noimg.jpg');
             $table->text('desc')->nullable();
             $table->timestamps();
@@ -34,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('products');
+        Schema::dropIfExists('vendors');
     }
 };
