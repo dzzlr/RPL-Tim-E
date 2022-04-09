@@ -47,7 +47,7 @@
     <div id="app">
         <x-navigation-bar />
 
-        <main class="py-4 flex-shrink-0">
+        <main class="py-4 flex-shrink-0" style="margin-top: 4rem">
             @yield('content')
         </main>
 

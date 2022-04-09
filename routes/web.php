@@ -30,5 +30,6 @@ Route::group(['middleware'=>'checkRole:admin'], function() {
 
 Route::group(['middleware'=>'checkRole:vendor', 'prefix'=>'/dashboard/vendor', 'as'=>'vendor.'], function() {
     Route::get('/', [VendorController::class, 'index'])->name('index');
+    Route::get('/toko', [VendorController::class, 'showProfile'])->name('profile.index');
     Route::resource('product', ProductController::class);
 });
